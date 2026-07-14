@@ -3,3 +3,5 @@ images/*.jpg
 images/*.png
 !songs/README.txt
 !images/README.txt
+!images/icon-192.png
+!images/icon-512.png
