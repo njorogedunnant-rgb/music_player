@@ -38,6 +38,11 @@ body {
   color: #fff;
 }
 
+.topbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
 .icon-btn {
   background: #2a2b33;
   border: none;
@@ -56,6 +61,67 @@ body {
 .icon-btn.active {
   background: #6a3de8;
   color: #fff;
+}
+
+/* --- Equalizer panel --- */
+.eq-panel {
+  flex-shrink: 0;
+  background: #1b1c22;
+  border-bottom: 1px solid #2a2b33;
+  padding: 12px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.eq-panel.hidden {
+  display: none;
+}
+
+#visualizer {
+  width: 100%;
+  max-width: 600px;
+  height: 60px;
+  display: block;
+}
+
+.eq-bands {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+}
+
+.eq-band {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.eq-slider {
+  -webkit-appearance: slider-vertical;
+  width: 6px;
+  height: 90px;
+  background: #33343d;
+  border-radius: 4px;
+}
+
+.eq-value {
+  font-size: 10px;
+  color: #6a3de8;
+  font-weight: 600;
+  min-height: 12px;
+}
+
+.eq-label {
+  font-size: 10px;
+  color: #9a9dab;
+}
+
+.icon-btn.small {
+  padding: 5px 12px;
+  font-size: 11px;
 }
 
 /* --- Main area: big art display + side panel --- */
@@ -288,6 +354,22 @@ input[type="range"]::-moz-range-thumb {
   color: #ddd;
 }
 
+.seek-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ddd;
+  padding: 4px;
+}
+
+.seek-btn:hover {
+  color: #fff;
+}
+
+.seek-btn svg {
+  display: block;
+}
+
 #play {
   background: #6a3de8;
   color: #fff;
@@ -336,5 +418,17 @@ input[type="range"]::-moz-range-thumb {
 
   .controls-side.volume input[type="range"] {
     max-width: 60px;
+  }
+
+  .eq-bands {
+    gap: 12px;
+  }
+
+  .eq-slider {
+    height: 70px;
+  }
+
+  #visualizer {
+    height: 44px;
   }
 }

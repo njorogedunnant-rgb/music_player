@@ -12,7 +12,47 @@
 
     <div class="topbar">
       <span class="app-title">🎵 Music Player</span>
-      <button id="listToggle" class="icon-btn" title="Show all tracks">📋 Tracks</button>
+      <div class="topbar-actions">
+        <button id="eqToggle" class="icon-btn" title="Equalizer">🎚️ EQ</button>
+        <button id="listToggle" class="icon-btn" title="Show all tracks">📋 Tracks</button>
+      </div>
+    </div>
+
+    <div class="eq-panel hidden" id="eqPanel">
+      <canvas id="visualizer" width="500" height="60"></canvas>
+      <div class="eq-bands">
+        <div class="eq-band">
+          <input type="range" orient="vertical" class="eq-slider" data-freq="60" min="-12" max="12" value="0" step="1">
+          <span class="eq-value">0</span>
+          <span class="eq-label">60</span>
+        </div>
+        <div class="eq-band">
+          <input type="range" orient="vertical" class="eq-slider" data-freq="170" min="-12" max="12" value="0" step="1">
+          <span class="eq-value">0</span>
+          <span class="eq-label">170</span>
+        </div>
+        <div class="eq-band">
+          <input type="range" orient="vertical" class="eq-slider" data-freq="350" min="-12" max="12" value="0" step="1">
+          <span class="eq-value">0</span>
+          <span class="eq-label">350</span>
+        </div>
+        <div class="eq-band">
+          <input type="range" orient="vertical" class="eq-slider" data-freq="1000" min="-12" max="12" value="0" step="1">
+          <span class="eq-value">0</span>
+          <span class="eq-label">1k</span>
+        </div>
+        <div class="eq-band">
+          <input type="range" orient="vertical" class="eq-slider" data-freq="3500" min="-12" max="12" value="0" step="1">
+          <span class="eq-value">0</span>
+          <span class="eq-label">3.5k</span>
+        </div>
+        <div class="eq-band">
+          <input type="range" orient="vertical" class="eq-slider" data-freq="10000" min="-12" max="12" value="0" step="1">
+          <span class="eq-value">0</span>
+          <span class="eq-label">10k</span>
+        </div>
+      </div>
+      <button id="eqReset" class="icon-btn small" title="Reset EQ">Reset</button>
     </div>
 
     <div class="main-area">
@@ -46,9 +86,19 @@
 
         <div class="controls-center">
           <button id="prev" title="Previous track">⏮</button>
-          <button id="seekBack" title="Back 10 seconds">⏪10</button>
+          <button id="seekBack" class="seek-btn" title="Back 10 seconds">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path fill="currentColor" d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+              <text x="12" y="16.5" font-size="7" text-anchor="middle" fill="currentColor" font-family="Arial, sans-serif" font-weight="bold">10</text>
+            </svg>
+          </button>
           <button id="play" title="Play/Pause">▶</button>
-          <button id="seekForward" title="Forward 10 seconds">10⏩</button>
+          <button id="seekForward" class="seek-btn" title="Forward 10 seconds">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path fill="currentColor" d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/>
+              <text x="12" y="16.5" font-size="7" text-anchor="middle" fill="currentColor" font-family="Arial, sans-serif" font-weight="bold">10</text>
+            </svg>
+          </button>
           <button id="next" title="Next track">⏭</button>
         </div>
 
