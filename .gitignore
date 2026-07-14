@@ -1,0 +1,5 @@
+songs/*.mp3
+images/*.jpg
+images/*.png
+!songs/README.txt
+!images/README.txt
