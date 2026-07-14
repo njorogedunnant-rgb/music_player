@@ -55,6 +55,9 @@ function loadSong(index) {
   artist.textContent = song.artist;
   cover.src = song.cover;
   audio.src = song.src;
+  progress.value = 0;
+  currentTimeEl.textContent = "0:00";
+  updateProgressFill(0);
   highlightActiveTrack();
 }
 
@@ -124,6 +127,12 @@ function formatTime(seconds) {
   return `${mins}:${secs}`;
 }
 
+function fillRange(rangeEl, percent) {
+  const p = Math.min(Math.max(percent, 0), 100);
+  rangeEl.style.background =
+    `linear-gradient(to right, #6a3de8 0%, #6a3de8 ${p}%, #33343d ${p}%, #33343d 100%)`;
+}
+
 function seekBy(seconds) {
   if (!audio.duration) return;
   audio.currentTime = Math.min(
@@ -136,16 +145,17 @@ function seekBy(seconds) {
 shuffleBtn.addEventListener("click", () => {
   isShuffle = !isShuffle;
   shuffleBtn.classList.toggle("active", isShuffle);
+  shuffleBtn.innerHTML = isShuffle ? "🔀 Shuffle: On" : "🔀 Shuffle";
   if (isShuffle) generateShuffleOrder();
 });
 
 // --- Repeat button (cycles off -> all -> one) ---
 function updateRepeatBtn() {
   repeatBtn.classList.toggle("active", repeatMode !== "off");
-  repeatBtn.innerHTML = repeatMode === "one" ? "🔂" : "🔁";
-  repeatBtn.title =
-    repeatMode === "off" ? "Repeat: off" :
-    repeatMode === "all" ? "Repeat: all" : "Repeat: one";
+  const icon = repeatMode === "one" ? "🔂" : "🔁";
+  const label = repeatMode === "off" ? "Off" : repeatMode === "all" ? "All" : "One";
+  repeatBtn.innerHTML = `${icon} Repeat: ${label}`;
+  repeatBtn.title = `Repeat: ${label}`;
 }
 
 repeatBtn.addEventListener("click", () => {
@@ -182,6 +192,12 @@ function renderTrackList(filter = "") {
   });
 }
 
+function updateProgressFill(percent) {
+  const p = Math.min(Math.max(percent, 0), 100);
+  progress.style.background =
+    `linear-gradient(to right, #6a3de8 ${p}%, #33343d ${p}%)`;
+}
+
 function highlightActiveTrack() {
   [...trackListEl.children].forEach(li => {
     li.classList.toggle("active", Number(li.dataset.index) === songIndex);
@@ -213,8 +229,10 @@ audio.addEventListener("loadedmetadata", () => {
 
 audio.addEventListener("timeupdate", () => {
   if (audio.duration) {
-    progress.value = (audio.currentTime / audio.duration) * 100;
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progress.value = percent;
     currentTimeEl.textContent = formatTime(audio.currentTime);
+    updateProgressFill(percent);
   }
 });
 
@@ -239,6 +257,7 @@ audio.addEventListener("ended", () => {
 });
 
 progress.addEventListener("input", () => {
+  updateProgressFill(progress.value);
   if (audio.duration) {
     audio.currentTime = (progress.value / 100) * audio.duration;
   }
