@@ -30,9 +30,20 @@
       <button id="next" title="Next track">⏭</button>
     </div>
 
+    <div class="secondary-controls">
+      <button id="shuffle" class="toggle-btn" title="Shuffle">🔀</button>
+      <button id="repeat" class="toggle-btn" title="Repeat">🔁</button>
+      <button id="listToggle" class="toggle-btn" title="Show all tracks">📋 Tracks</button>
+    </div>
+
     <div class="volume">
       <i class="vol-icon">🔊</i>
       <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+    </div>
+
+    <div class="track-list-panel hidden" id="trackListPanel">
+      <input type="text" id="trackSearch" placeholder="Search tracks...">
+      <ul id="trackList"></ul>
     </div>
   </div>
 
