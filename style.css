@@ -86,16 +86,21 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
 .controls button {
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
   color: #333;
+  white-space: nowrap;
+}
+
+#prev, #next {
+  font-size: 20px;
 }
 
 #play {

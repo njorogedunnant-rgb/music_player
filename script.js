@@ -5,6 +5,8 @@ const cover = document.getElementById("cover");
 const playBtn = document.getElementById("play");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
+const seekBackBtn = document.getElementById("seekBack");
+const seekForwardBtn = document.getElementById("seekForward");
 const progress = document.getElementById("progress");
 const currentTimeEl = document.getElementById("currentTime");
 const durationEl = document.getElementById("duration");
@@ -75,8 +77,18 @@ playBtn.addEventListener("click", () => {
   isPlaying ? pauseSong() : playSong();
 });
 
+function seekBy(seconds) {
+  if (!audio.duration) return;
+  audio.currentTime = Math.min(
+    Math.max(audio.currentTime + seconds, 0),
+    audio.duration
+  );
+}
+
 nextBtn.addEventListener("click", nextSong);
 prevBtn.addEventListener("click", prevSong);
+seekForwardBtn.addEventListener("click", () => seekBy(10));
+seekBackBtn.addEventListener("click", () => seekBy(-10));
 
 audio.addEventListener("loadedmetadata", () => {
   durationEl.textContent = formatTime(audio.duration);
