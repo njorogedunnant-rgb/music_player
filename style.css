@@ -214,6 +214,22 @@ body {
   flex: 1;
 }
 
+.track-list-header {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.track-list-header #trackSearch {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.track-list-header .icon-btn.small {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
 #trackList li {
   padding: 9px 10px;
   border-radius: 8px;
@@ -221,8 +237,38 @@ body {
   font-size: 13px;
   color: #ddd;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.track-info {
+  display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.track-info span:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-delete-btn {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+  flex-shrink: 0;
+}
+
+.track-delete-btn:hover {
+  color: #ff3b3b;
 }
 
 #trackList li:hover {

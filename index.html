@@ -70,7 +70,11 @@
       </div>
 
       <aside class="track-list-panel hidden" id="trackListPanel">
-        <input type="text" id="trackSearch" placeholder="Search tracks...">
+        <div class="track-list-header">
+          <input type="text" id="trackSearch" placeholder="Search tracks...">
+          <button id="addTrackBtn" class="icon-btn small" title="Add tracks from your device">+ Add</button>
+        </div>
+        <input type="file" id="addTrackInput" accept="audio/*" multiple hidden>
         <ul id="trackList"></ul>
       </aside>
     </div>
