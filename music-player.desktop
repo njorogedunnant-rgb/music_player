@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Njoro Music Player
+Comment=Local music player
+Exec=/home/NJOROGE/Projects/music-player/run.sh
+Icon=audio-x-generic
+Terminal=false
+Type=Application
+Categories=AudioVideo;Audio;Player;

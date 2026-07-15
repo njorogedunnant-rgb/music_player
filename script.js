@@ -198,7 +198,13 @@ function playSong() {
   if (audioCtx && audioCtx.state === "suspended") {
     audioCtx.resume();
   }
-  audio.play();
+  const playPromise = audio.play();
+  if (playPromise && playPromise.catch) {
+    playPromise.catch(err => {
+      console.error("Playback failed:", err);
+      alert("This track couldn't be played. The file format may not be supported by your browser.");
+    });
+  }
   playBtn.innerHTML = "&#10074;&#10074;"; // pause icon ||
   isPlaying = true;
 }
@@ -502,6 +508,16 @@ document.addEventListener("keydown", (e) => {
 
 audio.addEventListener("loadedmetadata", () => {
   durationEl.textContent = formatTime(audio.duration);
+});
+
+audio.addEventListener("error", () => {
+  const song = songs[songIndex];
+  console.error("Audio error on track:", song ? song.name : "(unknown)", audio.error);
+  pauseSong();
+  alert(
+    `"${song ? song.name : "This track"}" couldn't be played. ` +
+    `The file format may not be supported by your browser, or the file may be corrupted.`
+  );
 });
 
 audio.addEventListener("timeupdate", () => {

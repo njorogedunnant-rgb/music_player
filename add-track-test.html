@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Track — Test Template</title>
+<style>
+  * { box-sizing: border-box; font-family: Arial, sans-serif; }
+  body {
+    background: #14151a;
+    color: #eee;
+    padding: 30px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  h2 { font-size: 18px; margin-bottom: 6px; }
+  p.hint { color: #9a9dab; font-size: 13px; margin-bottom: 20px; }
+  .row { display: flex; gap: 8px; margin-bottom: 12px; }
+  input[type="text"] {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1px solid #33343d;
+    border-radius: 8px;
+    background: #23242c;
+    color: #eee;
+  }
+  button {
+    background: #2a2b33;
+    color: #ccc;
+    border: none;
+    border-radius: 20px;
+    padding: 9px 16px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  button:hover { background: #35363f; }
+  #status {
+    background: #23242c;
+    border: 1px solid #33343d;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #9a9dab;
+    margin-bottom: 14px;
+    min-height: 20px;
+  }
+  ul { list-style: none; padding: 0; }
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1b1c22;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  .del-btn {
+    background: none;
+    color: #ff6b6b;
+    font-size: 16px;
+    padding: 2px 8px;
+  }
+  .del-btn:hover { color: #ff3b3b; background: none; }
+</style>
+</head>
+<body>
+
+  <h2>Add Track — Test Template</h2>
+  <p class="hint">Click "+ Add" below. If your OS file picker opens, the code works — the issue is specific to the Chromium app-mode window on your main player. If nothing happens here either, it's a browser/permissions issue we can dig into further.</p>
+
+  <div class="row">
+    <input type="text" placeholder="(search box — not functional in this demo)">
+    <button id="addBtn">+ Add</button>
+  </div>
+  <input type="file" id="fileInput" accept="audio/*" multiple hidden>
+
+  <div id="status">Waiting for you to click "+ Add"...</div>
+
+  <ul id="list"></ul>
+
+  <script>
+    const addBtn = document.getElementById("addBtn");
+    const fileInput = document.getElementById("fileInput");
+    const status = document.getElementById("status");
+    const list = document.getElementById("list");
+
+    addBtn.addEventListener("click", () => {
+      status.textContent = "Button clicked — triggering file input now...";
+      fileInput.click();
+    });
+
+    fileInput.addEventListener("change", (e) => {
+      const files = Array.from(e.target.files);
+      status.textContent = `File picker returned ${files.length} file(s).`;
+
+      files.forEach(file => {
+        const li = document.createElement("li");
+        const label = document.createElement("span");
+        label.textContent = file.name;
+
+        const delBtn = document.createElement("button");
+        delBtn.className = "del-btn";
+        delBtn.textContent = "×";
+        delBtn.addEventListener("click", () => li.remove());
+
+        li.appendChild(label);
+        li.appendChild(delBtn);
+        list.appendChild(li);
+      });
+
+      e.target.value = "";
+    });
+  </script>
+</body>
+</html>
