@@ -271,6 +271,22 @@ body {
   color: #ff3b3b;
 }
 
+.restore-link {
+  background: none;
+  border: none;
+  color: #7a7d8a;
+  font-size: 11px;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px 0 2px;
+  flex-shrink: 0;
+}
+
+.restore-link:hover {
+  color: #9a9dab;
+  text-decoration: underline;
+}
+
 #trackList li:hover {
   background: #2a2b33;
 }
